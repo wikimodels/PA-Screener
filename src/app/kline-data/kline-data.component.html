@@ -1,0 +1,10 @@
+<div class="container">
+  <div class="header-container">
+    <div class="header">
+      {{title}} {{timeframe}}
+    </div>
+  </div>
+  <div *ngFor="let data of marketData?.data">
+    <app-repo-kline-row [item]="data"></app-repo-kline-row>
+  </div>
+</div>

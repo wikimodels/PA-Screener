@@ -1,0 +1,15 @@
+<mat-toolbar color="primary">
+  <button mat-icon-button>
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>My Angular App</span>
+  <button mat-icon-button matTooltip="Fractal Chaos" (click)="onGoToMarketData()">
+    <mat-icon style="cursor: pointer;">add-circle</mat-icon>
+  </button>
+
+  <div class="nav-links">
+    <a mat-button routerLink="/">Home</a>
+    <a mat-button routerLink="/about">About</a>
+    <a mat-button routerLink="/contact">Contact</a>
+  </div>
+</mat-toolbar>

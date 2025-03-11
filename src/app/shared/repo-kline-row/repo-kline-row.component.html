@@ -1,0 +1,16 @@
+<div class="table-row">
+
+  <div class="left-column">
+    <span>{{ item.openTime | date:'yyyy-MM-dd HH:mm' }} ({{item.repoKlines.length}})</span>
+  </div>
+
+
+  <div class="right-column">
+    <div class="repo-kline-container">
+      <div *ngFor="let kline of item.repoKlines" class="repo-kline">
+
+        <app-repo-kline-item [item]=kline></app-repo-kline-item>
+      </div>
+    </div>
+  </div>
+</div>

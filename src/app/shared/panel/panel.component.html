@@ -1,0 +1,8 @@
+<div class="header-container">
+  <div class="header">{{header}}</div>
+</div>
+<div class="item-row">
+  <div *ngFor="let item of data"> <!-- {{item.title}} -->
+    <app-market-data-item [item]="item" [timeframe]="timeframe"></app-market-data-item>
+  </div>
+</div>

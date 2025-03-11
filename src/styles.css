@@ -1,0 +1,21 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+/* SNACKBAR CSS FOR ANGULAR 16 */
+.warning-snackbar {
+  --mdc-snackbar-container-color: #0000b3;
+  --mat-mdc-snack-bar-button-color: white;
+}
+
+/* SNACKBAR CSS FOR ANGULAR 16 */
+.error-snackbar {
+  --mdc-snackbar-container-color: rgb(168, 31, 31);
+  --mat-mdc-snack-bar-button-color: white;
+}
+
+/* SNACKBAR CSS FOR ANGULAR 16 */
+.info-snackbar {
+  --mdc-snackbar-container-color: green;
+  --mat-mdc-snack-bar-button-color: white;
+}

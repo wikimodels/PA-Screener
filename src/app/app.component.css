@@ -1,0 +1,21 @@
+mat-toolbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 2rem;
+}
+
+mat-toolbar .nav-links {
+  margin-left: auto;
+  gap: 1rem;
+  display: flex;
+}
+
+mat-toolbar .nav-links a {
+  color: white;
+}
+
+main {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}

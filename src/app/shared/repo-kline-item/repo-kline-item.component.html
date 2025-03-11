@@ -1,0 +1,6 @@
+<div matRipple class="card-container mat-elevation-z2" (click)="toggleItem(item)" [class.selected]="isSelected(item)">
+  <div class="logo">
+    <img [src]="item.imageUrl ? item.imageUrl : 'assets/img/noname.png'" alt="logo" />
+  </div>
+  <div class="symbol-name"> {{item.category}} </div>
+</div>
