@@ -4,7 +4,6 @@ import { Injectable } from '@angular/core';
 @Injectable({ providedIn: 'root' })
 export class CoinLinksService {
   coinglassLink(symbol: string, exchanges: string[]): string {
-    
     // Check if "Binance" is in exchanges
     if (exchanges.includes('Binance')) {
       return `https://www.coinglass.com/tv/Binance_${symbol}`;
@@ -31,16 +30,15 @@ export class CoinLinksService {
   }
 
   tradingViewLink(symbol: string, exchanges: string[]): string {
-   
     // Check if "Bybit" is in exchanges
     if (exchanges.includes('Bybit')) {
       return `https://www.tradingview.com/chart?symbol=BYBIT:${symbol}.P`;
     }
 
     // Check if "Binance" is in exchanges and "Bybit" is not
-    if (exchanges.includes('Binance') && !exchanges.includes('Bybit')) {
-      return `https://www.tradingview.com/chart?symbol=BINANCE:${symbol}.P`;
-    }
+    // if (exchanges.includes('Binance') && !exchanges.includes('Bybit')) {
+    //   return `https://www.tradingview.com/chart?symbol=BINANCE:${symbol}.P`;
+    // }
 
     // Check if "BingX SF" is in exchanges and neither "Binance" nor "Bybit" is present
     if (

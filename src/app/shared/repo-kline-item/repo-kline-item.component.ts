@@ -21,7 +21,9 @@ export class RepoKlineItemComponent {
   isSelected(item: RepoKline) {
     return this.selectionService.isSelected(item);
   }
+
   toggleItem(item: RepoKline): void {
     this.selectionService.toggle(item);
+    console.log(this.selectionService.selectedValues());
   }
 }

@@ -8,7 +8,7 @@ import { TF } from 'src/models/shared/timeframes';
   styleUrls: ['./panel.component.css'],
 })
 export class PanelComponent {
-  @Input() data: MarketData[] = [];
+  @Input() data: MarketData[] | undefined = [];
   @Input() timeframe!: TF;
 
   get header(): string {

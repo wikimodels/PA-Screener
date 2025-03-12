@@ -1,25 +1,19 @@
+// market-data.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, forkJoin } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, forkJoin, of } from 'rxjs';
+import { catchError, mergeMap } from 'rxjs/operators';
 import { baseURL } from 'src/consts/urls';
 import { TF } from 'src/models/shared/timeframes';
 import { MarketData } from 'src/models/market-data';
-
-interface MarketDataEntry {
-  timeframe: TF;
-  data: MarketData[];
-}
+import { MarketDataEntry } from 'src/models/market-data-entry';
+import { db } from './dexie.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MarketDataService {
   private apiUrl = baseURL; // Base API URL
-
-  private marketData: MarketDataEntry[] = []; // Store all market data
-  private dataSubject = new BehaviorSubject<MarketDataEntry[]>([]); // Observable store
-  public data$ = this.dataSubject.asObservable(); // Observable for components
 
   constructor(private http: HttpClient) {}
 
@@ -32,31 +26,60 @@ export class MarketDataService {
     };
 
     return forkJoin(requests).pipe(
-      map((result) => {
-        // Map fetched data into the required format
-        this.marketData = [
+      // Use mergeMap to handle the Promise properly
+      mergeMap(async (result) => {
+        const marketData: MarketDataEntry[] = [
           { timeframe: TF.m15, data: result.min15 },
           { timeframe: TF.h1, data: result.h1 },
           { timeframe: TF.h4, data: result.h4 },
         ];
 
-        // Update observable for subscribers
-        this.dataSubject.next(this.marketData);
+        await db.marketData.clear();
+        await db.marketData.bulkAdd(marketData);
 
-        return this.marketData;
+        return marketData;
+      }),
+      catchError((error) => {
+        console.error('Error loading market data:', error);
+        return of([]);
       })
     );
   }
-
   /** Get market data by timeframe */
-  getDataByTimeframe(tf: TF): MarketData[] {
-    const entry = this.marketData.find((item) => item.timeframe === tf);
-    return entry ? entry.data : [];
+  getDataByTimeframe(tf: TF): Observable<MarketDataEntry | undefined> {
+    return new Observable<MarketDataEntry | undefined>((observer) => {
+      db.marketData
+        .where('timeframe')
+        .equals(tf)
+        .first()
+        .then((entry) => {
+          observer.next(entry);
+          observer.complete();
+        })
+        .catch((error) => {
+          observer.error(error);
+        });
+    });
   }
 
-  getDataByTimeframeAndType(tf: TF, type: string): MarketData | undefined {
-    const entry = this.marketData.find((item) => item.timeframe === tf);
-    const data = entry?.data.find((d) => d.type == type);
-    return data ? data : undefined;
+  /** Get market data by timeframe and type */
+  getDataByTimeframeAndType(
+    tf: TF,
+    type: string
+  ): Observable<MarketData | undefined> {
+    return new Observable<MarketData | undefined>((observer) => {
+      db.marketData
+        .where('timeframe')
+        .equals(tf)
+        .first()
+        .then((entry) => {
+          const data = entry?.data.find((d) => d.type === type);
+          observer.next(data);
+          observer.complete();
+        })
+        .catch((error) => {
+          observer.error(error);
+        });
+    });
   }
 }
