@@ -49,12 +49,12 @@ export class MarketDataService {
   }
 
   /** Get market data by timeframe */
-  getDataByTimeframe(tf: TF): Observable<MarketData | undefined> {
+  getMarketDataByTimeframe(tf: TF): Observable<MarketData | undefined> {
     return db.marketData.where('timeframe').equals(tf).first();
   }
 
   /** Get market data by timeframe and type */
-  getDataByTimeframeAndType(
+  getMarketDataByTimeframeAndType(
     tf: TF,
     type: string
   ): Observable<MarketData | undefined> {

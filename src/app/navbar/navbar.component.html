@@ -1,4 +1,4 @@
-<mat-toolbar color="primary">
+<mat-toolbar class="fixed-nav" color="primary">
   <button mat-icon-button>
     <mat-icon>menu</mat-icon>
   </button>
@@ -6,7 +6,9 @@
   <button mat-icon-button matTooltip="Fractal Chaos" (click)="onGoToMarketData()">
     <mat-icon style="cursor: pointer;">add-circle</mat-icon>
   </button>
-
+  <button mat-icon-button matTooltip="Fractal Chaos" (click)="onGoToTrendData()">
+    <mat-icon style="cursor: pointer;">archive</mat-icon>
+  </button>
   <div class="nav-links">
     <a mat-button routerLink="/">Home</a>
     <a mat-button routerLink="/about">About</a>

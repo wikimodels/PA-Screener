@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
-import { MarketData } from 'src/models/market-data';
-import { MarketDataEntry } from 'src/models/market-data-entry';
+import { tap, switchMap } from 'rxjs';
+import { MarketSummary } from 'src/models/market-summary';
 
 import { ReportType } from 'src/models/report-type';
 import { TF } from 'src/models/shared/timeframes';
@@ -22,12 +22,15 @@ export class AppComponent {
   ) {}
 
   ngOnInit(): void {
-    this.marketDataService.loadAllData().subscribe(() => {
-      console.log('All market data loaded!');
-    });
+    this.marketDataService
+      .loadAllData()
+
+      .subscribe((data) => {
+        console.log('All data loaded');
+      });
+
     this.registerIcons();
   }
-
   registerIcons(): void {
     const icons: { name: string; url: string }[] = [
       { name: 'bingx-sf', url: 'assets/icons/bingx-sf.svg' },

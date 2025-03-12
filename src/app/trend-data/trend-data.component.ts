@@ -7,11 +7,11 @@ import { Subject, forkJoin, takeUntil, catchError, of } from 'rxjs';
 import { MarketDataEntry } from 'src/models/market-data-entry';
 
 @Component({
-  selector: 'app-market-data',
-  templateUrl: './market-data.component.html',
-  styleUrls: ['./market-data.component.css'],
+  selector: 'app-trend-data',
+  templateUrl: './trend-data.component.html',
+  styleUrls: ['./trend-data.component.css'],
 })
-export class MarketDataComponent implements OnInit {
+export class TrendDataComponent implements OnInit {
   data15m!: MarketDataEntry | undefined;
   data1h!: MarketDataEntry | undefined;
   data4h!: MarketDataEntry | undefined;

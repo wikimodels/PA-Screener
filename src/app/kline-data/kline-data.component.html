@@ -1,32 +1,30 @@
 <div class="container">
-  <div style="display: flex; flex-direction: row; align-items: center; justify-content: space-around; width: 100%;">
+  <div id="header" class="fixed-header">
     <div (click)="onHeaderClick()" style="flex-grow: 1;">
       <div class="header">
         {{title}} {{timeframe}}
       </div>
     </div>
-
     <!-- SELECT CHECKBOX -->
     <button mat-raised-button class="panel-button">
       <mat-checkbox [checked]="selectionService.hasValue()" (change)="toggleAll()"
         [disabled]="!selectionService.hasValue()"></mat-checkbox>
       <mat-icon svgIcon="check"></mat-icon>
     </button>
-
     <!-- OPEN IN TV BUTTON -->
     <button mat-raised-button class="panel-button" (click)="onOpenTradingview()" matTooltip="Open in TV"
       matTooltipPosition="above">
       <mat-icon svgIcon="tv" style="margin-left: 6px;"></mat-icon>
     </button>
-
-    <!-- OPEN IN TV BUTTON -->
+    <!-- CLOSE ALL WINDOWS BUTTON -->
     <button mat-raised-button class="panel-button" (click)="onCloseAllWindows()" matTooltip="Close TV"
       matTooltipPosition="above">
       <mat-icon style="margin-left: 6px; padding-top: 5px;">close</mat-icon>
     </button>
   </div>
-
-  <div *ngFor="let data of marketData?.data">
-    <app-repo-kline-row [item]="data"></app-repo-kline-row>
+  <div style="margin-top: 130px;">
+    <div *ngFor="let data of marketData?.data">
+      <app-repo-kline-row [item]="data"></app-repo-kline-row>
+    </div>
   </div>
 </div>

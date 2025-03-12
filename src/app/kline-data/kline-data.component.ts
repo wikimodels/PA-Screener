@@ -39,7 +39,7 @@ export class KlineDataComponent implements OnDestroy {
 
     this.subscription.add(
       this.marketDataService
-        .getDataByTimeframeAndType(this.timeframe, this.type)
+        .getMarketDataByTimeframeAndType(this.timeframe, this.type)
         .subscribe({
           next: (data) => {
             this.marketData = data;

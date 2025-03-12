@@ -15,6 +15,7 @@ import { PanelComponent } from './shared/panel/panel.component';
 import { MarketDataComponent } from './market-data/market-data.component';
 import { MarketDataItemComponent } from './shared/market-data-item/market-data-item.component';
 import { KlineDataComponent } from './kline-data/kline-data.component';
+import { TrendDataComponent } from './trend-data/trend-data.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,6 +26,7 @@ import { KlineDataComponent } from './kline-data/kline-data.component';
     MarketDataComponent,
     MarketDataItemComponent,
     KlineDataComponent,
+    TrendDataComponent,
   ],
   imports: [
     BrowserModule,
