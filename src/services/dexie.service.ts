@@ -10,7 +10,7 @@ export class AppDB extends Dexie {
     super('market-data-db');
     this.version(1).stores({
       marketData: '++id, timeframe',
-      marketSummary: '++id, type, title', // Added marketSummary table
+      marketSummary: '++id, timeframe', // Added marketSummary table
     });
   }
 

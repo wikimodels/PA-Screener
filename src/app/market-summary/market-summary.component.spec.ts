@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MarketDataComponent } from './trend-data.component';
+import { MarketSummaryComponent } from './market-summary.component';
 
 describe('MarketDataComponent', () => {
-  let component: MarketDataComponent;
-  let fixture: ComponentFixture<MarketDataComponent>;
+  let component: MarketSummaryComponent;
+  let fixture: ComponentFixture<MarketSummaryComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [MarketDataComponent],
+      declarations: [MarketSummaryComponent],
     });
-    fixture = TestBed.createComponent(MarketDataComponent);
+    fixture = TestBed.createComponent(MarketSummaryComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,0 +1,8 @@
+.container{
+  display: flex;
+  justify-content: space-evenly; /* Distributes elements evenly */
+  align-items: center; /* Aligns elements vertically */
+  margin-top:  80px; /* Adjust this to move it below the navbar */
+  max-height: 30vh; /* Ensures it's somewhere in the middle */
+
+}

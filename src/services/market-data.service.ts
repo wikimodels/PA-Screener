@@ -1,8 +1,8 @@
 // market-data.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, forkJoin, of } from 'rxjs';
-import { catchError, mergeMap } from 'rxjs/operators';
+import { Observable, concat, forkJoin, of } from 'rxjs';
+import { catchError, mergeMap, switchMap } from 'rxjs/operators';
 import { baseURL } from 'src/consts/urls';
 import { TF } from 'src/models/shared/timeframes';
 import { MarketData } from 'src/models/market-data';
@@ -22,7 +22,7 @@ export class MarketDataService {
   /** Fetch and store all market data */
   loadAllData(): Observable<MarketDataEntry[]> {
     const requests = {
-      min15: this.http.get<MarketData[]>(`${this.apiUrl}/market-data/min15`),
+      m15: this.http.get<MarketData[]>(`${this.apiUrl}/market-data/min15`),
       h1: this.http.get<MarketData[]>(`${this.apiUrl}/market-data/h1`),
       h4: this.http.get<MarketData[]>(`${this.apiUrl}/market-data/h4`),
     };
@@ -90,6 +90,24 @@ export class MarketDataService {
     });
   }
 
+  getMarketSummaryByTimeframe(
+    tf: TF
+  ): Observable<MarketSummaryEntry | undefined> {
+    return new Observable<MarketSummaryEntry | undefined>((observer) => {
+      db.marketSummary
+        .where('timeframe')
+        .equals(tf)
+        .first()
+        .then((entry) => {
+          observer.next(entry);
+          observer.complete();
+        })
+        .catch((error) => {
+          observer.error(error);
+        });
+    });
+  }
+
   /** Get market data by timeframe and type */
   getMarketDataByTimeframeAndType(
     tf: TF,
@@ -109,5 +127,44 @@ export class MarketDataService {
           observer.error(error);
         });
     });
+  }
+
+  getMarketSummaryByTimeframeAndType(
+    tf: TF,
+    type: string
+  ): Observable<MarketSummary | undefined> {
+    return new Observable<MarketSummary | undefined>((observer) => {
+      db.marketSummary
+        .where('timeframe')
+        .equals(tf)
+        .first()
+        .then((entry) => {
+          const data = entry?.data.find((d) => d.type === type);
+          observer.next(data);
+          observer.complete();
+        })
+        .catch((error) => {
+          observer.error(error);
+        });
+    });
+  }
+
+  clearDatabase(): Observable<void> {
+    return new Observable<void>((observer) => {
+      Promise.all([db.marketData.clear(), db.marketSummary.clear()])
+        .then(() => {
+          console.log('✅ IndexedDB cleared');
+          observer.next();
+          observer.complete();
+        })
+        .catch((error) => {
+          console.error('❌ Error clearing IndexedDB:', error);
+          observer.error(error);
+        });
+    });
+  }
+
+  fetchMarketData(): Observable<MarketDataEntry[]> {
+    return this.clearDatabase().pipe(switchMap(() => this.loadAllData()));
   }
 }

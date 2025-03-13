@@ -23,7 +23,6 @@ export class KlineDataComponent implements OnDestroy {
   private openedWindows: Window[] = [];
 
   constructor(
-    private router: Router,
     private route: ActivatedRoute,
     private coinsLinksService: CoinLinksService,
     private marketDataService: MarketDataService,

@@ -7,7 +7,7 @@ export const ADMIN = 'admin';
 export const WORK = 'work';
 export const MARKET_DATA = 'market-data';
 export const KLINE_DATA = 'kline-data/:type/:title/:timeframe';
-export const TREND_DATA = 'trend-data';
+export const MARKET_SUMMARY = 'market-summary';
 
 //URLS
 export const baseURL = env.baseURL;

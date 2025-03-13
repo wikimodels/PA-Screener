@@ -1,11 +1,7 @@
 import { Component } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
-import { tap, switchMap } from 'rxjs';
-import { MarketSummary } from 'src/models/market-summary';
 
-import { ReportType } from 'src/models/report-type';
-import { TF } from 'src/models/shared/timeframes';
 import { MarketDataService } from 'src/services/market-data.service';
 
 @Component({
@@ -22,12 +18,9 @@ export class AppComponent {
   ) {}
 
   ngOnInit(): void {
-    this.marketDataService
-      .loadAllData()
-
-      .subscribe((data) => {
-        console.log('All data loaded');
-      });
+    this.marketDataService.fetchMarketData().subscribe((data) => {
+      console.log('All data loaded');
+    });
 
     this.registerIcons();
   }

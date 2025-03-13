@@ -1,4 +1,3 @@
-import { MarketData } from 'src/models/market-data';
 import { Component, OnInit } from '@angular/core';
 
 import { TF } from 'src/models/shared/timeframes';

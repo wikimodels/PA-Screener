@@ -13,9 +13,14 @@ import { RepoKlineItemComponent } from './shared/repo-kline-item/repo-kline-item
 import { RepoKlineRowComponent } from './shared/repo-kline-row/repo-kline-row.component';
 import { PanelComponent } from './shared/panel/panel.component';
 import { MarketDataComponent } from './market-data/market-data.component';
-import { MarketDataItemComponent } from './shared/market-data-item/market-data-item.component';
+import { MarketDataItemComponent } from './market-data/market-data-item/market-data-item.component';
 import { KlineDataComponent } from './kline-data/kline-data.component';
-import { TrendDataComponent } from './trend-data/trend-data.component';
+import { MarketSummaryItemComponent } from './market-summary/market-summary-item/market-summary-item.component';
+import { MarketSummaryComponent } from './market-summary/market-summary.component';
+import { KlineSummaryComponent } from './kline-summary/kline-summary.component';
+import { KlineSummaryItemComponent } from './kline-summary/kline-summary-item/kline-summary-item.component';
+import { KlineSummaryTableComponent } from './kline-summary/kline-summary-table/kline-summary-table.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +31,11 @@ import { TrendDataComponent } from './trend-data/trend-data.component';
     MarketDataComponent,
     MarketDataItemComponent,
     KlineDataComponent,
-    TrendDataComponent,
+    MarketSummaryItemComponent,
+    MarketSummaryComponent,
+    KlineSummaryComponent,
+    KlineSummaryItemComponent,
+    KlineSummaryTableComponent,
   ],
   imports: [
     BrowserModule,
