@@ -1,6 +1,5 @@
 <div class="container">
   <div *ngFor="let item of marketSummaryEntry?.data">
-    <div class="header">{{item.title}}</div>
-    <app-kline-summary-table [data]="item.data"></app-kline-summary-table>
+    <app-kline-summary-chart [summary]="item"></app-kline-summary-chart>
   </div>
 </div>

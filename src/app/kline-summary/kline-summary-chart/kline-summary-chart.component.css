@@ -1,0 +1,13 @@
+
+.chart-container {
+  margin-top: 30px;
+  width: 100%;
+  padding: 30px;
+}
+
+.echart {
+  width: 500px; /* Fixed width per chart */
+  height: 300px; /* Adjust height as needed */
+  flex: 1 1 500px; /* Ensures flexibility and wrapping */
+  max-width: 100%;
+}

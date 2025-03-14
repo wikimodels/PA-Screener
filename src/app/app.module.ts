@@ -1,3 +1,19 @@
+import { CanvasRenderer } from 'echarts/renderers';
+
+import * as echarts from 'echarts/core';
+import Marcaron from './marcaron';
+import { BarChart, CandlestickChart, LineChart } from 'echarts/charts';
+import {
+  TitleComponent,
+  TooltipComponent,
+  GridComponent,
+  DataZoomComponent,
+  DataZoomInsideComponent,
+  DataZoomSliderComponent,
+  LegendComponent,
+  ToolboxComponent,
+} from 'echarts/components';
+
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -18,8 +34,25 @@ import { KlineDataComponent } from './kline-data/kline-data.component';
 import { MarketSummaryItemComponent } from './market-summary/market-summary-item/market-summary-item.component';
 import { MarketSummaryComponent } from './market-summary/market-summary.component';
 import { KlineSummaryComponent } from './kline-summary/kline-summary.component';
-import { KlineSummaryItemComponent } from './kline-summary/kline-summary-item/kline-summary-item.component';
-import { KlineSummaryTableComponent } from './kline-summary/kline-summary-table/kline-summary-table.component';
+
+import { KlineSummaryChartComponent } from './kline-summary/kline-summary-chart/kline-summary-chart.component';
+import { NgxEchartsModule } from 'ngx-echarts';
+
+echarts.use([
+  LegendComponent,
+  TitleComponent,
+  TooltipComponent,
+  GridComponent,
+  LineChart,
+  CanvasRenderer,
+  BarChart,
+  CandlestickChart,
+  DataZoomComponent,
+  DataZoomInsideComponent,
+  DataZoomSliderComponent,
+  ToolboxComponent,
+]);
+echarts.registerTheme('macarons', Marcaron);
 
 @NgModule({
   declarations: [
@@ -34,8 +67,7 @@ import { KlineSummaryTableComponent } from './kline-summary/kline-summary-table/
     MarketSummaryItemComponent,
     MarketSummaryComponent,
     KlineSummaryComponent,
-    KlineSummaryItemComponent,
-    KlineSummaryTableComponent,
+    KlineSummaryChartComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,6 +75,7 @@ import { KlineSummaryTableComponent } from './kline-summary/kline-summary-table/
     BrowserAnimationsModule,
     AppMaterialModule,
     HttpClientModule,
+    NgxEchartsModule.forRoot({ echarts }),
   ],
   providers: [],
   bootstrap: [AppComponent],
