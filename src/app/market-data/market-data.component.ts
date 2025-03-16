@@ -4,6 +4,7 @@ import { TF } from 'src/models/shared/timeframes';
 import { MarketDataService } from 'src/services/market-data.service';
 import { Subject, forkJoin, takeUntil, catchError, of } from 'rxjs';
 import { MarketDataEntry } from 'src/models/market-data-entry';
+import { RepoTypesService } from 'src/services/repo-types.service';
 
 @Component({
   selector: 'app-market-data',
@@ -16,15 +17,18 @@ export class MarketDataComponent implements OnInit {
   data4h!: MarketDataEntry | undefined;
   TF = TF;
 
-  constructor(private marketDataService: MarketDataService) {} // Use camelCase for service instance
+  constructor(
+    private marketDataService: MarketDataService,
+    private repoTypesService: RepoTypesService
+  ) {} // Use camelCase for service instance
 
   private destroy$ = new Subject<void>();
 
   ngOnInit(): void {
     forkJoin({
-      m15: this.marketDataService.getMarketDataByTimeframe(TF.m15),
-      h1: this.marketDataService.getMarketDataByTimeframe(TF.h1),
-      h4: this.marketDataService.getMarketDataByTimeframe(TF.h4),
+      m15: this.marketDataService.getFilteredMarketDataByTimeframe(TF.m15),
+      h1: this.marketDataService.getFilteredMarketDataByTimeframe(TF.h1),
+      h4: this.marketDataService.getFilteredMarketDataByTimeframe(TF.h4),
     })
       .pipe(
         takeUntil(this.destroy$),

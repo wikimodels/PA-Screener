@@ -15,11 +15,11 @@ export class AppDB extends Dexie {
   }
 
   async storeMarketData(entry: MarketDataEntry): Promise<number> {
-    return await this.marketData.add(entry);
+    return await this.marketData.put(entry);
   }
 
   async storeMarketSummary(entry: MarketSummaryEntry): Promise<number> {
-    return await this.marketSummary.add(entry);
+    return await this.marketSummary.put(entry);
   }
 
   async storeData(

@@ -35,13 +35,21 @@ export class KlineDataComponent implements OnDestroy {
     this.timeframe = decodeURIComponent(
       this.route.snapshot.paramMap.get('timeframe')!
     ) as TF;
-
     this.subscription.add(
       this.marketDataService
         .getMarketDataByTimeframeAndType(this.timeframe, this.type)
         .subscribe({
           next: (data) => {
             this.marketData = data;
+            console.log(
+              'timeframe',
+              this.timeframe,
+              'type',
+              this.type,
+              'title',
+              this.title
+            );
+            console.log('MarketData', this.marketData);
           },
           error: (err) => {
             console.error('Error fetching data:', err);
