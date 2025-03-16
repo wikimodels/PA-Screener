@@ -2,7 +2,7 @@ import { SnackbarService } from './snackbar.service';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, forkJoin } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { baseURL } from 'src/consts/urls';
 import { TF } from 'src/models/shared/timeframes';
 import { MarketData } from 'src/models/market-data';
@@ -13,7 +13,7 @@ import { ResponseData } from 'src/models/response-data';
 import { MarketSummaryEntry } from 'src/models/market-summary-entry';
 import { RepoTypesService } from './repo-types.service';
 import { RepoTypes } from 'src/models/repo-types';
-import { time } from 'echarts';
+import { SnackbarType } from 'src/models/shared/snackbar-type';
 
 @Injectable({
   providedIn: 'root',
@@ -162,28 +162,44 @@ export class MarketDataService {
   ): Observable<MarketDataEntry[]> {
     return new Observable((observer) => {
       if (forceRefresh) {
-        this.snackbarService.showSnackBar('🔄 Refreshing market data...');
+        this.snackbarService.showSnackBar(
+          '🔄 Refreshing market data...',
+          '',
+          3000,
+          SnackbarType.Info
+        );
 
         this.clearDatabase().subscribe({
           next: () => {
             this.loadAllData().subscribe({
               next: (data) => {
                 this.snackbarService.showSnackBar(
-                  '✅ Market data refreshed successfully!'
+                  '✅ Market data refreshed successfully!',
+                  '',
+                  3000,
+                  SnackbarType.Info
                 );
                 observer.next(data);
                 observer.complete();
               },
               error: (error) => {
                 this.snackbarService.showSnackBar(
-                  '❌ Failed to refresh market data.'
+                  '❌ Failed to refresh market data.',
+                  '',
+                  5000,
+                  SnackbarType.Error
                 );
                 observer.error(error);
               },
             });
           },
           error: (error) => {
-            this.snackbarService.showSnackBar('❌ Error clearing database.');
+            this.snackbarService.showSnackBar(
+              '❌ Error clearing database.',
+              '',
+              5000,
+              SnackbarType.Error
+            );
             observer.error(error);
           },
         });
@@ -191,7 +207,12 @@ export class MarketDataService {
         return;
       }
 
-      this.snackbarService.showSnackBar('📂 Loading market data...');
+      this.snackbarService.showSnackBar(
+        '📂 Loading market data...',
+        '',
+        3000,
+        SnackbarType.Info
+      );
 
       db.marketData
         .count()
@@ -202,7 +223,10 @@ export class MarketDataService {
               .toArray()
               .then((entries) => {
                 this.snackbarService.showSnackBar(
-                  '✅ Loaded market data from IndexedDB.'
+                  '✅ Loaded market data from IndexedDB.',
+                  '',
+                  3000,
+                  SnackbarType.Info
                 );
                 observer.next(entries);
                 observer.complete();
@@ -213,14 +237,20 @@ export class MarketDataService {
             this.loadAllData().subscribe({
               next: (data) => {
                 this.snackbarService.showSnackBar(
-                  '✅ Market data fetched from API.'
+                  '✅ Market data fetched from API.',
+                  '',
+                  3000,
+                  SnackbarType.Info
                 );
                 observer.next(data);
                 observer.complete();
               },
               error: (error) => {
                 this.snackbarService.showSnackBar(
-                  '❌ Failed to fetch market data.'
+                  '❌ Failed to fetch market data.',
+                  '',
+                  3000,
+                  SnackbarType.Error
                 );
                 observer.error(error);
               },

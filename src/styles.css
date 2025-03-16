@@ -6,16 +6,20 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .warning-snackbar {
   --mdc-snackbar-container-color: #0000b3;
   --mat-mdc-snack-bar-button-color: white;
+  --mdc-snackbar-supporting-text-color: white;
+
 }
 
 /* SNACKBAR CSS FOR ANGULAR 16 */
 .error-snackbar {
   --mdc-snackbar-container-color: rgb(168, 31, 31);
   --mat-mdc-snack-bar-button-color: white;
+  --mdc-snackbar-supporting-text-color: white;
 }
 
 /* SNACKBAR CSS FOR ANGULAR 16 */
 .info-snackbar {
   --mdc-snackbar-container-color: green;
   --mat-mdc-snack-bar-button-color: white;
+  --mdc-snackbar-supporting-text-color: white;
 }
