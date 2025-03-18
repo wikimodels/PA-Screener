@@ -15,6 +15,7 @@ export class MarketDataComponent implements OnInit {
   data15m!: MarketDataEntry | undefined;
   data1h!: MarketDataEntry | undefined;
   data4h!: MarketDataEntry | undefined;
+  data8h!: MarketDataEntry | undefined;
   TF = TF;
 
   constructor(
@@ -26,9 +27,10 @@ export class MarketDataComponent implements OnInit {
 
   ngOnInit(): void {
     forkJoin({
-      m15: this.marketDataService.getFilteredMarketDataByTimeframe(TF.m15),
-      h1: this.marketDataService.getFilteredMarketDataByTimeframe(TF.h1),
-      h4: this.marketDataService.getFilteredMarketDataByTimeframe(TF.h4),
+      m15: this.marketDataService.getMarketDataByTimeframe(TF.m15),
+      h1: this.marketDataService.getMarketDataByTimeframe(TF.h1),
+      h4: this.marketDataService.getMarketDataByTimeframe(TF.h4),
+      h8: this.marketDataService.getMarketDataByTimeframe(TF.h8),
     })
       .pipe(
         takeUntil(this.destroy$),
@@ -42,6 +44,7 @@ export class MarketDataComponent implements OnInit {
           this.data15m = results.m15;
           this.data1h = results.h1;
           this.data4h = results.h4;
+          this.data8h = results.h8;
         }
       });
   }

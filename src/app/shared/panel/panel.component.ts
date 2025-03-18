@@ -16,6 +16,7 @@ export class PanelComponent {
       [TF.m15]: 'Timeframe 15min',
       [TF.h1]: 'Timeframe 1h',
       [TF.h4]: 'Timeframe 4h',
+      [TF.h8]: 'Timeframe 8h',
     };
     return headersMap[this.timeframe] || 'Unknown Timeframe';
   }

@@ -11,8 +11,6 @@ import { db } from './dexie.service';
 
 import { ResponseData } from 'src/models/response-data';
 import { MarketSummaryEntry } from 'src/models/market-summary-entry';
-import { RepoTypesService } from './repo-types.service';
-import { RepoTypes } from 'src/models/repo-types';
 import { SnackbarType } from 'src/models/shared/snackbar-type';
 
 @Injectable({
@@ -23,8 +21,7 @@ export class MarketDataService {
 
   constructor(
     private http: HttpClient,
-    private snackbarService: SnackbarService,
-    private repoTypesService: RepoTypesService
+    private snackbarService: SnackbarService
   ) {}
 
   /** Fetch and store all market data */
@@ -33,6 +30,7 @@ export class MarketDataService {
       m15: this.http.get<ResponseData>(`${this.apiUrl}/market-data/min15`),
       h1: this.http.get<ResponseData>(`${this.apiUrl}/market-data/h1`),
       h4: this.http.get<ResponseData>(`${this.apiUrl}/market-data/h4`),
+      h8: this.http.get<ResponseData>(`${this.apiUrl}/market-data/h8`),
     };
 
     return forkJoin(requests).pipe(
@@ -153,10 +151,6 @@ export class MarketDataService {
     });
   }
 
-  /** Fetch Market Data and clear existing DB before storing */
-  // fetchMarketData(): Observable<MarketDataEntry[]> {
-  //   return this.clearDatabase().pipe(switchMap(() => this.loadAllData()));
-  // }
   fetchMarketData(
     forceRefresh: boolean = false
   ): Observable<MarketDataEntry[]> {
@@ -256,44 +250,6 @@ export class MarketDataService {
               },
             });
           }
-        })
-        .catch((error) => observer.error(error));
-    });
-  }
-
-  getFilteredMarketDataByTimeframe(
-    timeframe: TF
-  ): Observable<MarketDataEntry | undefined> {
-    return new Observable((observer) => {
-      db.marketData
-        .where('timeframe')
-        .equals(timeframe)
-        .first()
-        .then((entry) => {
-          if (entry) {
-            console.log(timeframe, entry);
-            const allowedRepoTypes =
-              this.repoTypesService.getRepoTypesForTimeframe(timeframe);
-            console.log(timeframe, allowedRepoTypes);
-            observer.next({
-              id: entry.id,
-              timeframe: entry.timeframe,
-              data: entry.data.filter((d) => {
-                const isValidType = Object.values(RepoTypes).includes(
-                  d.type as RepoTypes
-                );
-                console.log(
-                  `Checking Type: ${d.type} -> Valid: ${isValidType}`
-                );
-                return (
-                  isValidType && allowedRepoTypes.includes(d.type as RepoTypes)
-                );
-              }),
-            });
-          } else {
-            observer.next(undefined);
-          }
-          observer.complete();
         })
         .catch((error) => observer.error(error));
     });
