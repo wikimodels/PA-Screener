@@ -1,9 +1,10 @@
-import { Subscription, takeUntil } from 'rxjs';
 import { Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { MarketSummaryEntry } from 'src/models/market-summary-entry';
+
 import { TF } from 'src/models/shared/timeframes';
-import { MarketDataService } from 'src/services/market-data.service';
+
+import { chartsConfig } from 'src/data/summary-charts-config';
+import { SummaryChartsConfig } from 'src/models/summary-charts-config';
 
 @Component({
   selector: 'app-kline-summary',
@@ -11,28 +12,16 @@ import { MarketDataService } from 'src/services/market-data.service';
   styleUrls: ['./kline-summary.component.css'],
 })
 export class KlineSummaryComponent implements OnDestroy {
+  configs!: SummaryChartsConfig[];
   timeframe!: TF;
-  marketSummaryEntry!: MarketSummaryEntry | undefined;
-  subscription = new Subscription();
-  constructor(
-    private route: ActivatedRoute,
-    private marketDataService: MarketDataService
-  ) {}
+  constructor(private route: ActivatedRoute) {}
   ngOnInit() {
     this.timeframe = decodeURIComponent(
       this.route.snapshot.paramMap.get('timeframe')!
     ) as TF;
-    this.subscription.add(
-      this.marketDataService
-        .getMarketSummaryByTimeframe(this.timeframe)
-        .subscribe((data) => {
-          this.marketSummaryEntry = data;
-          console.log('KlineSummary', data);
-        })
-    );
-    console.log(this.timeframe);
+    this.configs = chartsConfig.filter((c) => c.timeframe == this.timeframe);
+
+    console.log(this.configs);
   }
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
+  ngOnDestroy(): void {}
 }

@@ -37,6 +37,8 @@ import { KlineSummaryComponent } from './kline-summary/kline-summary.component';
 
 import { KlineSummaryChartComponent } from './kline-summary/kline-summary-chart/kline-summary-chart.component';
 import { NgxEchartsModule } from 'ngx-echarts';
+import { CHART_SERVICES } from 'src/consts/chart-services';
+import { StackedBarsService } from 'src/services/charts/stacked-bars.service';
 
 echarts.use([
   LegendComponent,
@@ -77,7 +79,13 @@ echarts.registerTheme('macarons', Marcaron);
     HttpClientModule,
     NgxEchartsModule.forRoot({ echarts }),
   ],
-  providers: [],
+  providers: [
+    {
+      provide: CHART_SERVICES,
+      useClass: StackedBarsService, // Your concrete service
+      multi: true, // Allows multiple registrations
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -1,5 +1,7 @@
 <div class="container">
-  <div *ngFor="let item of marketSummaryEntry?.data">
-    <app-kline-summary-chart [summary]="item"></app-kline-summary-chart>
+
+  <div *ngFor="let config of configs">
+    <app-kline-summary-chart [config]="config"></app-kline-summary-chart>
   </div>
+
 </div>
