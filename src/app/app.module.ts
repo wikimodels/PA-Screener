@@ -39,6 +39,8 @@ import { KlineSummaryChartComponent } from './kline-summary/kline-summary-chart/
 import { NgxEchartsModule } from 'ngx-echarts';
 import { CHART_SERVICES } from 'src/consts/chart-services';
 import { StackedBarsService } from 'src/services/charts/stacked-bars.service';
+import { GroupedBarsService } from 'src/services/charts/grouped-bars.service';
+import { StackedLineService } from 'src/services/charts/stacked-line.service';
 
 echarts.use([
   LegendComponent,
@@ -83,6 +85,16 @@ echarts.registerTheme('macarons', Marcaron);
     {
       provide: CHART_SERVICES,
       useClass: StackedBarsService, // Your concrete service
+      multi: true, // Allows multiple registrations
+    },
+    {
+      provide: CHART_SERVICES,
+      useClass: GroupedBarsService, // Your concrete service
+      multi: true, // Allows multiple registrations
+    },
+    {
+      provide: CHART_SERVICES,
+      useClass: StackedLineService, // Your concrete service
       multi: true, // Allows multiple registrations
     },
   ],
