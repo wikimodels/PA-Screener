@@ -29,7 +29,7 @@ export const chartsConfig: SummaryChartsConfig[] = [
   // ⚙️ MA1 Falling vs. Rising vs. Fluctuate
   {
     timeframe: TF.m15,
-    chartTitle: 'MA1 Falling vs. Rising vs. Fluctuate',
+    chartTitle: 'MA1 Rising/Falling/Fluctuate',
     colors: [
       '#2E7D32', // Deep forest green
       '#D32F2F', // Darker crimson
@@ -64,7 +64,7 @@ export const chartsConfig: SummaryChartsConfig[] = [
   // 🌊 Daily VWAP Turns Up/Down
   {
     timeframe: TF.m15,
-    chartTitle: 'Daily VWAP Ups/Downs',
+    chartTitle: 'Daily VWAP Turns Up/Down',
     colors: [
       '#2E7D32', // Deep forest green
       '#D32F2F', // Darker crimson
@@ -128,7 +128,7 @@ export const chartsConfig: SummaryChartsConfig[] = [
   // 🍀 EMA Fans: Compare Bullish, Bearish, and Mess fan counts
   {
     timeframe: TF.m15,
-    chartTitle: 'VWAP Daily Rising vs. Falling vs. Fluctuate',
+    chartTitle: 'VWAP Daily MA1 Rising/Falling/Fluctuate',
     colors: [
       '#2E7D32', // Deep forest green
       '#D32F2F', // Darker crimson
