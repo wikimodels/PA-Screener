@@ -124,4 +124,22 @@ export const chartsConfig: SummaryChartsConfig[] = [
     chartType: ChartTypes.GroupedBars,
     sliceNumber: 150,
   },
+
+  // 🍀 EMA Fans: Compare Bullish, Bearish, and Mess fan counts
+  {
+    timeframe: TF.m15,
+    chartTitle: 'VWAP Daily Rising vs. Falling vs. Fluctuate',
+    colors: [
+      '#2E7D32', // Deep forest green
+      '#D32F2F', // Darker crimson
+      '#FBC02D', // Golden yellow
+    ],
+    targetTypes: [
+      { type: RepoTypes.VwapDailyRising, title: 'Rising' },
+      { type: RepoTypes.VwapDailyFalling, title: 'Falling' },
+      { type: RepoTypes.VwapDailyFluctuate, title: 'Fluctuate' },
+    ],
+    chartType: ChartTypes.StackedLine,
+    sliceNumber: 150,
+  },
 ];

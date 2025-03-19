@@ -1,7 +1,26 @@
-<div class="container">
+<!-- <div class="container">
 
   <div *ngFor="let config of configs">
     <app-kline-summary-chart [config]="config"></app-kline-summary-chart>
   </div>
 
+</div> -->
+<!-- chart-container.component.html -->
+
+<div style="margin: 80px 0 auto; width: 100vw; text-align: center;">
+  <h1>Charts {{this.timeframe}}</h1>
+</div>
+<div class="dashboard" cdkDropList (cdkDropListDropped)="drop($event)">
+
+  <div *ngFor="let config of configs" class="chart-card" cdkDrag cdkDragBoundary=".dashboard" [cdkDragData]="config">
+
+    <!-- Drag handle -->
+    <div class="drag-handle" cdkDragHandle>
+      <mat-icon>drag_indicator</mat-icon>
+    </div>
+
+    <!-- Chart component -->
+    <app-kline-summary-chart [config]="config"></app-kline-summary-chart>
+
+  </div>
 </div>

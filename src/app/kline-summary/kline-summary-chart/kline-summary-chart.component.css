@@ -2,12 +2,12 @@
 .chart-container {
   margin-top: 1%;
   width: 100%;
-  padding: 30px;
+  padding: 10px;
 }
 
 .echart {
-  width: 500px; /* Fixed width per chart */
-  height: 350px; /* Adjust height as needed */
-  flex: 1 1 500px; /* Ensures flexibility and wrapping */
+  width: 590px; /* Fixed width per chart */
+  height: 400px; /* Adjust height as needed */
+  flex: 1 1 590px; /* Ensures flexibility and wrapping */
   max-width: 100%;
 }

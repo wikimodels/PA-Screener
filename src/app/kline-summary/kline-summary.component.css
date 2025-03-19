@@ -6,3 +6,50 @@
   gap: 20px; /* Space between charts */
   padding: 20px;
 }
+
+/* chart-container.component.css */
+.dashboard {
+  margin-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 10px;
+}
+
+.chart-card {
+  position: relative;
+  width: 620px;
+  height: 430px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 1px;
+  background: white;
+  transition: transform 0.2s ease;
+}
+
+.drag-handle {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  cursor: move;
+  opacity: 0.3;
+  transition: opacity 0.2s;
+}
+
+.drag-handle:hover {
+  opacity: 1;
+}
+
+.cdk-drag-preview {
+  box-sizing: border-box;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  opacity: 0.8;
+}
+
+.cdk-drag-placeholder {
+  opacity: 0.3;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}

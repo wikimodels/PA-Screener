@@ -15,7 +15,6 @@ mat-toolbar .nav-links a {
 }
 
 main {
-  padding: 2rem;
-  max-width: 1200px;
+  width: 96%;        /* Adjust the width as needed */
   margin: 0 auto;
 }
