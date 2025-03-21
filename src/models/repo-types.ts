@@ -54,6 +54,12 @@ export enum RepoTypes {
   IsHammer = 'isHammer',
   IsPinbar = 'isPinbar',
 
+  HmaRising = 'hmaRising',
+  HmaFalling = 'hmaFalling',
+  HmaFluctuating = 'hmaFluctuating',
+  HmaTurnsUp = 'hmaTurnsUp',
+  HmaTurnsDown = 'hmaTurnsDown',
+
   IsFractalChaosCrossedUp = 'isFractalChaosCrossedUp',
   IsFractalChaosCrossedDown = 'isFractalChaosCrossedDown',
 }

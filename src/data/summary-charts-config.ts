@@ -41,7 +41,7 @@ export const chartsConfig: SummaryChartsConfig[] = [
       { type: RepoTypes.Ma1Fluctuate, title: 'Fluctuate' },
     ],
     chartType: ChartTypes.StackedLine,
-    sliceNumber: 151,
+    sliceNumber: 150,
   },
 
   // 🐂 vs. 🐻 Candles
@@ -58,7 +58,7 @@ export const chartsConfig: SummaryChartsConfig[] = [
       { type: RepoTypes.IsBearishCandle, title: 'Bearish Bearish' },
     ],
     chartType: ChartTypes.StackedLine,
-    sliceNumber: 151,
+    sliceNumber: 150,
   },
 
   // 🌊 Daily VWAP Turns Up/Down
@@ -137,9 +137,60 @@ export const chartsConfig: SummaryChartsConfig[] = [
     targetTypes: [
       { type: RepoTypes.VwapDailyRising, title: 'Rising' },
       { type: RepoTypes.VwapDailyFalling, title: 'Falling' },
-      { type: RepoTypes.VwapDailyFluctuate, title: 'Fluctuate' },
+      { type: RepoTypes.VwapDailyFluctuate, title: 'Fluctuating' },
     ],
     chartType: ChartTypes.StackedLine,
     sliceNumber: 150,
+  },
+
+  // ↕️ HMA Turns Up/Down
+  {
+    timeframe: TF.m15,
+    chartTitle: 'HMA Turns Up/Down',
+    colors: [
+      '#2E7D32', // Deep forest green
+      '#D32F2F', // Darker crimson
+    ],
+    targetTypes: [
+      { type: RepoTypes.HmaTurnsUp, title: 'Turns Up' },
+      { type: RepoTypes.HmaTurnsDown, title: 'Turns Down' },
+    ],
+    chartType: ChartTypes.GroupedBars,
+    sliceNumber: 150,
+  },
+
+  // ⏬ Daily VWAP Cross Up/Down
+  {
+    timeframe: TF.m15,
+    chartTitle: 'HMA Rising/Falling',
+    colors: [
+      '#2E7D32', // Deep forest green
+      '#D32F2F', // Darker crimson,
+      '#FBC02D', // Golden yellow
+    ],
+    targetTypes: [
+      { type: RepoTypes.HmaRising, title: 'Rising' },
+      { type: RepoTypes.HmaFalling, title: 'Falling' },
+      { type: RepoTypes.HmaFluctuating, title: 'Fluctuating' },
+    ],
+    chartType: ChartTypes.StackedLine,
+    sliceNumber: 150,
+  },
+
+  // ⏬ CHO Positive/Negative
+  {
+    timeframe: TF.h2,
+    chartTitle: 'CHO Positive/Negative',
+    colors: [
+      '#2E7D32', // Deep forest green
+      '#D32F2F', // Darker crimson,
+      //'#FBC02D', // Golden yellow
+    ],
+    targetTypes: [
+      { type: RepoTypes.ChoPositive, title: 'Positive' },
+      { type: RepoTypes.ChoNegative, title: 'Negative' },
+    ],
+    chartType: ChartTypes.StackedLine,
+    sliceNumber: 100,
   },
 ];

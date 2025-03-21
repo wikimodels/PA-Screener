@@ -29,6 +29,7 @@ export class MarketDataService {
     const requests = {
       m15: this.http.get<ResponseData>(`${this.apiUrl}/market-data/min15`),
       h1: this.http.get<ResponseData>(`${this.apiUrl}/market-data/h1`),
+      h2: this.http.get<ResponseData>(`${this.apiUrl}/market-data/h2`),
       h4: this.http.get<ResponseData>(`${this.apiUrl}/market-data/h4`),
       h8: this.http.get<ResponseData>(`${this.apiUrl}/market-data/h8`),
     };

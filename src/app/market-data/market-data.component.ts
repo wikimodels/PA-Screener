@@ -4,7 +4,6 @@ import { TF } from 'src/models/shared/timeframes';
 import { MarketDataService } from 'src/services/market-data.service';
 import { Subject, forkJoin, takeUntil, catchError, of } from 'rxjs';
 import { MarketDataEntry } from 'src/models/market-data-entry';
-import { RepoTypesService } from 'src/services/repo-types.service';
 
 @Component({
   selector: 'app-market-data',
@@ -14,14 +13,12 @@ import { RepoTypesService } from 'src/services/repo-types.service';
 export class MarketDataComponent implements OnInit {
   data15m!: MarketDataEntry | undefined;
   data1h!: MarketDataEntry | undefined;
+  data2h!: MarketDataEntry | undefined;
   data4h!: MarketDataEntry | undefined;
   data8h!: MarketDataEntry | undefined;
   TF = TF;
 
-  constructor(
-    private marketDataService: MarketDataService,
-    private repoTypesService: RepoTypesService
-  ) {} // Use camelCase for service instance
+  constructor(private marketDataService: MarketDataService) {} // Use camelCase for service instance
 
   private destroy$ = new Subject<void>();
 
@@ -29,6 +26,7 @@ export class MarketDataComponent implements OnInit {
     forkJoin({
       m15: this.marketDataService.getMarketDataByTimeframe(TF.m15),
       h1: this.marketDataService.getMarketDataByTimeframe(TF.h1),
+      h2: this.marketDataService.getMarketDataByTimeframe(TF.h2),
       h4: this.marketDataService.getMarketDataByTimeframe(TF.h4),
       h8: this.marketDataService.getMarketDataByTimeframe(TF.h8),
     })
@@ -43,6 +41,7 @@ export class MarketDataComponent implements OnInit {
         if (results) {
           this.data15m = results.m15;
           this.data1h = results.h1;
+          this.data2h = results.h2;
           this.data4h = results.h4;
           this.data8h = results.h8;
         }
