@@ -16,6 +16,7 @@ export class MarketDataComponent implements OnInit {
   data2h!: MarketDataEntry | undefined;
   data4h!: MarketDataEntry | undefined;
   data8h!: MarketDataEntry | undefined;
+  dataD!: MarketDataEntry | undefined;
   TF = TF;
 
   constructor(private marketDataService: MarketDataService) {} // Use camelCase for service instance
@@ -29,6 +30,7 @@ export class MarketDataComponent implements OnInit {
       h2: this.marketDataService.getMarketDataByTimeframe(TF.h2),
       h4: this.marketDataService.getMarketDataByTimeframe(TF.h4),
       h8: this.marketDataService.getMarketDataByTimeframe(TF.h8),
+      D: this.marketDataService.getMarketDataByTimeframe(TF.D),
     })
       .pipe(
         takeUntil(this.destroy$),
@@ -44,6 +46,7 @@ export class MarketDataComponent implements OnInit {
           this.data2h = results.h2;
           this.data4h = results.h4;
           this.data8h = results.h8;
+          this.dataD = results.D;
         }
       });
   }

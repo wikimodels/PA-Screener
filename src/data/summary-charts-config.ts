@@ -193,4 +193,39 @@ export const chartsConfig: SummaryChartsConfig[] = [
     chartType: ChartTypes.StackedLine,
     sliceNumber: 100,
   },
+
+  // ⏬ D Bullish Candles/Bearish Candles
+  {
+    timeframe: TF.D,
+    chartTitle: 'Day Bullish Candles/Bearish Candles',
+    colors: [
+      '#2E7D32', // Deep forest green
+      '#D32F2F', // Darker crimson,
+      //'#FBC02D', // Golden yellow
+    ],
+    targetTypes: [
+      { type: RepoTypes.IsBullishCandle, title: 'Bullish' },
+      { type: RepoTypes.IsBearishCandle, title: 'Bearish' },
+    ],
+    chartType: ChartTypes.StackedLine,
+    sliceNumber: 1,
+  },
+
+  // ⏬ D Bullish Candles/Bearish Candles
+  {
+    timeframe: TF.D,
+    chartTitle: 'HMA Rising/Falling/Fluctuating',
+    colors: [
+      '#2E7D32', // Deep forest green
+      '#D32F2F', // Darker crimson,
+      '#FBC02D', // Golden yellow
+    ],
+    targetTypes: [
+      { type: RepoTypes.HmaRising, title: 'Rising' },
+      { type: RepoTypes.HmaFalling, title: 'Falling' },
+      { type: RepoTypes.HmaFluctuating, title: 'Fluctuating' },
+    ],
+    chartType: ChartTypes.StackedLine,
+    sliceNumber: 60,
+  },
 ];

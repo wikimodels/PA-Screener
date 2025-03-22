@@ -32,6 +32,7 @@ export class MarketDataService {
       h2: this.http.get<ResponseData>(`${this.apiUrl}/market-data/h2`),
       h4: this.http.get<ResponseData>(`${this.apiUrl}/market-data/h4`),
       h8: this.http.get<ResponseData>(`${this.apiUrl}/market-data/h8`),
+      D: this.http.get<ResponseData>(`${this.apiUrl}//market-data/d`),
     };
 
     return forkJoin(requests).pipe(
