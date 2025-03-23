@@ -15,8 +15,10 @@ export class PanelComponent {
     const headersMap: Partial<Record<TF, string>> = {
       [TF.m15]: 'Timeframe 15min',
       [TF.h1]: 'Timeframe 1h',
+      [TF.h2]: 'Timeframe 2h',
       [TF.h4]: 'Timeframe 4h',
       [TF.h8]: 'Timeframe 8h',
+      [TF.D]: 'Timeframe D',
     };
     return headersMap[this.timeframe] || 'Unknown Timeframe';
   }

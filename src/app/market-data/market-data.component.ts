@@ -47,6 +47,8 @@ export class MarketDataComponent implements OnInit {
           this.data4h = results.h4;
           this.data8h = results.h8;
           this.dataD = results.D;
+          console.log('Day', this.dataD);
+          console.log('2h', this.data2h);
         }
       });
   }

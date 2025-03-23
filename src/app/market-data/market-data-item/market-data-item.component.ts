@@ -16,12 +16,6 @@ export class MarketDataItemComponent {
   constructor(private router: Router) {}
 
   onShowData(item: MarketData, timeframe: TF) {
-    // this.router.navigate([
-    //   '/kline-data',
-    //   encodeURIComponent(item.type),
-    //   encodeURIComponent(item.title),
-    //   encodeURIComponent(timeframe),
-    // ]);
     // 1. Create the URL using Angular's router
     const urlTree = this.router.createUrlTree([
       '/kline-data',
